@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('title');
             $table->string('image');
             $table->string('description')->max('255');
-            $table->foreignId('user_id')->constrainet()->ondelete('cascade')->onupdate('cascade');
+            $table->foreignId('user_id')->constrained()->ondelete('cascade')->onupdate('cascade');
 
             $table->timestamps();
         });
