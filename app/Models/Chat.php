@@ -12,7 +12,8 @@ class Chat extends Model
     use HasFactory;
 
     protected $fillable = [
-        'service_id'
+        'service_id',
+        'guest_user_id'
     ];
 
     public function messages(): HasMany
@@ -23,5 +24,10 @@ class Chat extends Model
     public function service(): BelongsTo
     {
         return $this->belongsTo(Service::class);
+    }
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
     }
 }
