@@ -44,7 +44,8 @@ Route::middleware('auth')->group(function () {
 
         //Chat
         Route::get('/{service_id}/chat/{id?}', [ChatController::class, 'show'])->name('chat.show');
-        Route::post('/chat/create', [ChatController::class, 'create'])->name('chat.create');        
+        Route::post('/{service_id}/chat/{id}', [ChatController::class, 'send'])->name('chat.send');        
+    
     });
 });
 
