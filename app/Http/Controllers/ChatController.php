@@ -16,11 +16,12 @@ class ChatController extends Controller
             $chat = Chat::find($id);
             $chat->service_id = $service_id;
             $chat->id = $id;
-        }else{
+        }else if($id==0){
             $chat = Chat::create([
                 'service_id' => $service_id,
                 'guest_user_id' => Auth::user()->id,
             ]);
+            $id= $chat->id;
         }
 
         $data['messages'] = Message::where('chat_id',$id)->get();
