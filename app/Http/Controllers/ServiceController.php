@@ -9,12 +9,6 @@ use Illuminate\Support\Facades\Auth;
 
 class ServiceController extends Controller
 {
-    public function index(Request $request){
-        $data['services'] = Service::all();
-
-        return view('dashboard',$data);
-    }
-
     public function new(Request $request){
         return view('service.new');
     }
