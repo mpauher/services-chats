@@ -3,6 +3,9 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ServiceController;
+use App\Http\Controllers\ChatController;
+use App\Http\Controllers\MainController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -19,19 +22,30 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', [ServiceController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', [MainController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    //Profile
+    Route::group([
+        'prefix' => 'profile'
+    ], function () {
+        Route::get('/', [ProfileController::class, 'edit'])->name('profile.edit');
+        Route::patch('/', [ProfileController::class, 'update'])->name('profile.update');
+        Route::delete('/', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    });
 
     //Services
-    Route::get('/service/new', [ServiceController::class, 'new'])->name('service.new');
-    Route::post('/service/create', [ServiceController::class, 'create'])->name('service.create');
+    Route::group([
+        'prefix' => 'service'
+    ], function () {
+        Route::get('/new', [ServiceController::class, 'new'])->name('service.new');
+        Route::post('/create', [ServiceController::class, 'create'])->name('service.create');
 
-
-
+        //Chat
+        Route::get('/{service_id}/chat/{id?}', [ChatController::class, 'show'])->name('chat.show');
+        Route::post('/chat/create', [ChatController::class, 'create'])->name('chat.create');        
+    });
 });
 
 require __DIR__.'/auth.php';
