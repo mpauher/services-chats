@@ -40,13 +40,16 @@ Route::middleware('auth')->group(function () {
         'prefix' => 'service'
     ], function () {
         Route::get('/new', [ServiceController::class, 'new'])->name('service.new');
+        Route::get('/my-services', [ServiceController::class, 'findByUser'])->name('service.my-services');
         Route::post('/create', [ServiceController::class, 'create'])->name('service.create');
 
         //Chat
         Route::get('/{service_id}/chat/{id?}', [ChatController::class, 'show'])->name('chat.show');
-        Route::post('/{service_id}/chat/{id}', [ChatController::class, 'send'])->name('chat.send');        
-    
+        Route::post('/{service_id}/chat/{id}', [ChatController::class, 'send'])->name('chat.send');           
     });
+
+    Route::get('/my-chats', [ChatController::class, 'findByUser'])->name('chat.my-chats');
+
 });
 
 require __DIR__.'/auth.php';

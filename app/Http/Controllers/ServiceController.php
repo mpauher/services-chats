@@ -29,4 +29,15 @@ class ServiceController extends Controller
         ]);
         return redirect('/dashboard')->with('status', 'Service created!');
     }
+
+    public function findByUser(){
+
+        $id = Auth::id();
+
+        $services = Service::where('user_id',$id)->get();
+       
+        $data['services'] = $services;
+
+        return view('service.my-services',$data);
+    }
 }
