@@ -19,12 +19,18 @@
                 <div class="p-6 text-gray-900 dark:text-gray-100">
                     @foreach ($messages as $message)
                     <div class="chat-message">
-                        <div class="flex items-end justify-end py-2">
-                            <div class="flex flex-col space-y-2 text-xs max-w-xs mx-2 order-1 items-end">
+                        <div class="flex @if($message->user_id == Auth::user()->id) justify-end items-end @endif  py-2">
+                            <div class="flex flex-col space-y-2 text-xs max-w-xs mx-2 order-1 @if($message->user_id == Auth::user()->id) items-end @endif">
                                 <div><span
-                                        class="px-4 py-2 rounded-lg inline-block rounded-br-none bg-blue-600 text-white ">{{ $message->text }}</span>
+                                        class="px-4 py-2 rounded-lg inline-block  @if($message->user_id == Auth::user()->id) rounded-br-none bg-blue-600 text-white @else bg-gray-300 text-gray-600 rounded-bl-none @endif ">{{ $message->text }}</span>
+                                </div>
+                                <div>
+                                    <span>
+                                        {{$message->date_for_humans}}
+                                    </span>
                                 </div>
                             </div>
+
                         </div>
                     </div>
                 @endforeach
