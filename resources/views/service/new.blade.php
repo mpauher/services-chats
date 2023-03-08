@@ -11,7 +11,7 @@
                 <h2 class="font-semibold text-xl text-white leading-tight mb-3">
                     {{ __('Services') }}
                 </h2>
-                <form method="post" action={{ route('service.create') }} class="mt-6 space-y-6">
+                <form method="post" action={{ route('service.create') }} class="mt-6 space-y-6" enctype="multipart/form-data">
                     @csrf
                     @method('post')
 
@@ -31,10 +31,9 @@
                     </div>
 
                     <div>
-                        <x-input-label for="image" :value="__('Image')" />
-                        <x-text-input id="image" name="image" type="text" class="mt-1 block w-full" required
-                            autofocus autocomplete="image" />
-                        <x-input-error class="mt-2" :messages="$errors->get('image')" />
+                        <x-input-label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="image" :value="__('Image')" />
+                        <input class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 p-2"  id="image" name="image" type="file">
+                        <p class="mt-1 text-sm text-gray-500 dark:text-gray-300" id="image_input_help">SVG, PNG, JPG or GIF (MAX. 800x400px).</p>                        
                     </div>
 
                     <div class="flex items-center gap-4">

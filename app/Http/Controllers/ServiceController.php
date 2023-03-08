@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Service;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Http\File;
 
 class ServiceController extends Controller
 {
@@ -18,13 +20,18 @@ class ServiceController extends Controller
         $request->validate([
             'title'=>'required|string',
             'description'=>'required|string',
-            'image'=>'required|string',
         ]);
+
+        $path = '';
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $path = Storage::disk('public')->put('services/images', $image);
+        }
 
         $service = Service::create([
             'title'=>$request->title,
             'description'=>$request->description,
-            'image'=>$request->image,
+            'image'=>$path,
             'user_id'=>Auth::id()
         ]);
         return redirect('/dashboard')->with('status', 'Service created!');

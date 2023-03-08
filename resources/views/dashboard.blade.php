@@ -29,7 +29,7 @@
                         <div class="my-3 max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
                             style="margin-bottom: 10px;">
                             <a href=#>
-                                <img class="rounded-t-lg " src="no-img.jpg" alt="" />
+                                <img class="rounded-t-lg " src="{{ asset($service->image) }}" alt="" style="height:300px"/>
                             </a>
                             <div class="p-5 ">
                                 <a href="#">
