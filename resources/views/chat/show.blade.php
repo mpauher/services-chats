@@ -16,7 +16,7 @@
 
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900 dark:text-gray-100">
+                <div class="max-h-56 overflow-y-auto px-6 py-3 text-gray-900 dark:text-gray-100">
                     @foreach ($messages as $message)
                     <div class="chat-message">
                         <div class="flex @if($message->user_id == Auth::user()->id) justify-end items-end @endif  py-2">
@@ -34,16 +34,14 @@
                         </div>
                     </div>
                 @endforeach
-
-                    <div class="mt-3">
-
-                        <form action="{{ route('chat.send',[$service_id, $chat_id])}}" method="POST">
-                            @csrf
-                            <label for="message" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Message:</label>
-                            <textarea rows="4" class="mb-2 block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Write your message here..." name="text" id="message" required></textarea>
-                            <x-primary-button type="submit">Send</x-primary-button>
-                        </form>
-                    </div>
+                </div>
+                <div class=" px-6 py-3 ">
+                    <form action="{{ route('chat.send',[$service_id, $chat_id])}}" method="POST">
+                        @csrf
+                        <label for="message" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Message:</label>
+                        <textarea rows="4" class="mb-2 block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Write your message here..." name="text" id="message" required></textarea>
+                        <x-primary-button type="submit">Send</x-primary-button>
+                    </form>
                 </div>
             </div>
         </div>

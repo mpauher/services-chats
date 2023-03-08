@@ -27,9 +27,11 @@ class ChatController extends Controller
             $id= $chat->id;
         }
 
-        $messages = Message::where('chat_id',$id)->get();
+        $messages = Message::where('chat_id', $id)->latest()->take(30)->get()->sortBy('created_at');
 
-        if(count($messages)>0){
+        // dd($messages);
+
+        if(count($messages) > 0){
             foreach($messages as $message){
                 $message->date_for_humans = $message->created_at->diffForHumans();
             }
