@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('messages', function (Blueprint $table) {
             $table->id();
             $table->string('text');
+            $table->string('file');
             $table->datetime('date');
             $table->foreignId('user_id')->constrained('users')->onupdate('cascade')->ondelete('cascade');
             $table->foreignId('chat_id')->constrained('chats')->onupdate('cascade')->ondelete('cascade');
