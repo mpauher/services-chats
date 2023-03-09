@@ -10,6 +10,8 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Http\File;
 
 class ChatController extends Controller
 {
@@ -49,21 +51,30 @@ class ChatController extends Controller
         $chat_id = $id;
 
         $request->validate([
-            'text'=>'required|string',
+            'text'=>'nullable|string',
         ]);
+
+        $path = '';
+
+        if ($request->hasFile('file')) {
+            $file = $request->file('file');
+            $path = Storage::disk('public')->put('chats/files', $file);
+        }
         
         $message = Message::create([
             'date'=>Carbon::now(),
             'text'=>$request->text,
+            'file'=>$path,
             'chat_id'=>$chat_id,
             'user_id'=>Auth::user()->id
         ]);
 
         return redirect()->route('chat.show', ['service_id' => $service_id, 'id' => $chat_id]);
-        // dd($chats[0]->created_at->diffForHumans());
     }
 
     public function findByUser(){
+
+        //Find chats where user is the owner 
 
         $chats = Service::join('chats', 'services.id', '=', 'chats.service_id')
         ->join('users', 'users.id', '=', 'chats.guest_user_id')
@@ -76,15 +87,9 @@ class ChatController extends Controller
             'users.id as guest_user_id',
             'users.name as guest_user_name'
             )
-        ->get();        
+        ->get();  
 
-        // foreach($chats as $chat){
-        //     $chat->guest_user = User::where('id',$chat->guest_user_id)->pluck('name')->first();
-        // }
-
-        // $data['services'] = $services;
         $data['chats'] = $chats;
-        // dd($chats);
 
         return view('chat.my-chats',$data);
     }
