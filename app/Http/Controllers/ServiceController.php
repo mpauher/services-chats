@@ -20,6 +20,7 @@ class ServiceController extends Controller
         $request->validate([
             'title'=>'required|string',
             'description'=>'required|string',
+            'imagen' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
         $path = '';
