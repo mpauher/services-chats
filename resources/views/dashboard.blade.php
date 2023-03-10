@@ -23,13 +23,13 @@
 
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900 dark:text-gray-100">
+                <div class="p-6 text-gray-900 dark:text-gray-100 flex flex-wrap ">
 
                     @foreach ($services as $service)
-                        <div class="my-3 max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
+                        <div class="my-3 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 w-full md:w-1/3"
                             style="margin-bottom: 10px;">
                             <a href={{ route('service.show', $service->id)}}>
-                                <img class="rounded-t-lg " src="{{ asset($service->image) }}" alt="" style="height:300px"/>
+                                <img class="rounded-t-lg " src="{{ asset($service->image) }}" alt="" style="height:300px; width:100%; object-fit:cover;"/>
                             </a>
                             <div class="p-5 ">
                                 <a href={{ route('service.show',['id' => $service->id])}}>

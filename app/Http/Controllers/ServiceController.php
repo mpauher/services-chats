@@ -27,6 +27,9 @@ class ServiceController extends Controller
         if ($request->hasFile('image')) {
             $image = $request->file('image');
             $path = Storage::disk('public')->put('services/images', $image);
+        }else{
+            $image = new File('/home/medusa/Downloads/no-image.jpg');
+            $path = Storage::disk('public')->put('services/images', $image);
         }
 
         $service = Service::create([
