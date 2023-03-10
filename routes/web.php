@@ -42,6 +42,8 @@ Route::middleware('auth')->group(function () {
         Route::get('/new', [ServiceController::class, 'new'])->name('service.new');
         Route::get('/my-services', [ServiceController::class, 'findByUser'])->name('service.my-services');
         Route::post('/create', [ServiceController::class, 'create'])->name('service.create');
+        Route::get('/{id}/show', [ServiceController::class, 'show'])->name('service.show');
+
 
         //Chat
         Route::get('/{service_id}/chat/{id?}', [ChatController::class, 'show'])->name('chat.show');

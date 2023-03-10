@@ -48,4 +48,13 @@ class ServiceController extends Controller
 
         return view('service.my-services',$data);
     }
+
+    public function show($id){
+
+        $service = Service::find($id);
+       
+        $data['service'] = $service;
+
+        return view('service.show', $data);
+    }
 }
