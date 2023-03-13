@@ -58,3 +58,16 @@ The application has a single type of user, registered users. To use the applicat
 4. Interested users can send a message to the service publisher from the service details page.
 
 5. Publishers can reply to messages from the chat page.
+
+## Built With
+
+- [Laravel](https://laravel.com/)
+- [Composer](https://getcomposer.org/)
+
+## Authors
+
+- María Paula Hernández
+
+## License
+
+This project is licensed under the MIT License.
