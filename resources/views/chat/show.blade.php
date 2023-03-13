@@ -16,7 +16,7 @@
 
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="max-h-56 overflow-y-auto px-6 py-3 text-gray-900 dark:text-gray-100">
+                <div class="max-h-56 overflow-y-auto px-6 py-3 text-gray-900 dark:text-gray-100" style="min-height: 250px;">
                     @foreach ($messages as $message)
                         @if (!empty($message->text))
                             <div class="chat-message">
@@ -68,7 +68,7 @@
                         <div class="flex h-8 inline-flex items-center ">
                             <div class="overflow-hidden relative w-64 mt-4 mb-4">
                                 <input
-                                    class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+                                    class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 mt-3"
                                     id="file" name="file" type="file">
                             </div>
                         </div>
