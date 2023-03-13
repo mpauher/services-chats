@@ -31,6 +31,14 @@ class ChatController extends Controller
 
         $messages = Message::where('chat_id', $id)->latest()->take(30)->get()->sortBy('created_at');
 
+        // $service = Service::where('id', $service_id)->first();
+
+        // if($service->user_id == Auth::user()->id){
+                    
+        // }
+
+        // dd($service);
+
         // dd($messages);
 
         if(count($messages) > 0){
